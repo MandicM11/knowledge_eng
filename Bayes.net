@@ -1,0 +1,233 @@
+net
+{
+     node_size = (0 0);
+     name = "New BN";
+     UnBBayes_Color_Probabilistic_Description = "-256";
+     UnBBayes_Color_Probabilistic_Explanation = "-16711936";
+}
+
+node Dusty_fan
+{
+     label = "C8";
+     position = (691 60);
+     states = ("YES" "NO");
+}
+
+node Dusty_case
+{
+     label = "C2";
+     position = (1076 24);
+     states = ("YES" "NO");
+}
+
+node Cooler_failing
+{
+     label = "C4";
+     position = (1091 135);
+     states = ("YES" "NO");
+}
+
+node Fan_not_working
+{
+     label = "C5";
+     position = (809 38);
+     states = ("YES" "NO");
+}
+
+node Cable_malfunction
+{
+     label = "C6";
+     position = (754 15);
+     states = ("YES" "NO");
+}
+
+node No_power
+{
+     label = "C9";
+     position = (911 34);
+     states = ("Yes" "No");
+}
+
+node Overheating
+{
+     label = "C10";
+     position = (959 105);
+     states = ("YES" "NO");
+}
+
+node Blue_screen
+{
+     label = "C11";
+     position = (1050 204);
+     states = ("State 0");
+}
+
+node Unexpected_shutdown
+{
+     label = "C12";
+     position = (919 315);
+     states = ("State 0");
+}
+
+node GPU_failing
+{
+     label = "C13";
+     position = (831 146);
+     states = ("State 0");
+}
+
+node CPU_not_working
+{
+     label = "C14";
+     position = (796 247);
+     states = ("State 0");
+}
+
+node RAM_failing
+{
+     label = "C15";
+     position = (812 191);
+     states = ("State 0");
+}
+
+node HDD_not_working
+{
+     label = "C16";
+     position = (788 305);
+     states = ("State 0");
+}
+
+node Slow_PC
+{
+     label = "C17";
+     position = (647 137);
+     states = ("State 0");
+}
+
+node HDD_coruppted
+{
+     label = "C18";
+     position = (614 260);
+     states = ("State 0");
+}
+
+node HDD_damaged
+{
+     label = "C19";
+     position = (645 320);
+     states = ("State 0");
+}
+
+node PC_not_booting_up
+{
+     label = "C20";
+     position = (524 183);
+     states = ("State 0");
+}
+
+potential (Dusty_fan)
+{
+ data = ( 0.4 0.6 );
+}
+
+potential (Dusty_case)
+{
+ data = ( 0.4 0.6 );
+}
+
+potential (Cooler_failing)
+{
+ data = ( 0.8 0.2 );
+}
+
+potential (Fan_not_working | Cable_malfunction Dusty_fan)
+{
+ data = ((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )));
+}
+
+potential (Cable_malfunction)
+{
+ data = ( 0.7 0.3 );
+}
+
+potential (No_power)
+{
+ data = ( 0.2 0.8 );
+}
+
+potential (Overheating | Fan_not_working Dusty_case Cooler_failing No_power)
+{
+ data = ((((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 ))))
+(((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))
+((( 1.0 0.0 )
+( 1.0 0.0 ))
+(( 1.0 0.0 )
+( 1.0 0.0 )))));
+}
+
+potential (Blue_screen | HDD_not_working CPU_not_working RAM_failing GPU_failing Overheating)
+{
+ data = (((((( 1.0 )
+( 1.0 ))))));
+}
+
+potential (Unexpected_shutdown | Blue_screen)
+{
+ data = (( 1.0 ));
+}
+
+potential (GPU_failing)
+{
+ data = ( 1.0 );
+}
+
+potential (CPU_not_working)
+{
+ data = ( 1.0 );
+}
+
+potential (RAM_failing)
+{
+ data = ( 1.0 );
+}
+
+potential (HDD_not_working | HDD_damaged HDD_coruppted)
+{
+ data = ((( 1.0 )));
+}
+
+potential (Slow_PC | Overheating HDD_not_working CPU_not_working RAM_failing GPU_failing)
+{
+ data = (((((( 1.0 )))))
+((((( 1.0 ))))));
+}
+
+potential (HDD_coruppted)
+{
+ data = ( 1.0 );
+}
+
+potential (HDD_damaged)
+{
+ data = ( 1.0 );
+}
+
+potential (PC_not_booting_up | No_power RAM_failing CPU_not_working GPU_failing)
+{
+ data = ((((( 1.0 ))))
+(((( 1.0 )))));
+}
+

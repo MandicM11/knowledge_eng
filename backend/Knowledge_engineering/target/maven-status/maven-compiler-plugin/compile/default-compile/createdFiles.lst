@@ -1,0 +1,9 @@
+app\Knowledge_engineering\service\GPUService.class
+app\Knowledge_engineering\config\WebConfiguration.class
+app\Knowledge_engineering\dto\MonitorRequestDTO.class
+app\Knowledge_engineering\service\MonitorService.class
+app\Knowledge_engineering\service\OntologyManager.class
+app\Knowledge_engineering\controller\MonitorController.class
+app\Knowledge_engineering\dto\MonitorResponseDTO.class
+app\Knowledge_engineering\service\CPUService.class
+app\Knowledge_engineering\KnowledgeEngineeringApplication.class
