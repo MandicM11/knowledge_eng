@@ -24,7 +24,7 @@ public class CPUService {
         this.ontologyIRI = "http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4";
         this.factory = OWLManager.getOWLDataFactory();
         OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-        this.ontology = loadOntology(manager, "C:/Users/Mirko/Desktop/knowledge-engineering-master/Knowlege-engineering/backend/Knowledge_engineering/data/Knowledge_base.ttl");
+        this.ontology = loadOntology(manager, "C:/Users/Mirko/Desktop/faks novi/knowledge-engineering-master/backend/Knowledge_engineering/data/Knowledge_base.ttl");
 
         // Ispiši sve klase
         logger.info("Classes in ontology:");

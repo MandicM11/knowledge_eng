@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86d58b77-5013-4475-9e56-d7ce72f95109" name="Changes" comment="" />
+    <list default="true" id="86d58b77-5013-4475-9e56-d7ce72f95109" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Knowledge_engineering.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/Knowledge_engineering.ipr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Knowledge_engineering.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Knowledge_engineering.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/CPUService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/CPUService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/MemoryModuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/MemoryModuleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/Knowledge_engineering/service/CPUService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/Knowledge_engineering/service/CPUService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/app/Knowledge_engineering/service/MemoryModuleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/Knowledge_engineering/service/MemoryModuleService.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -174,6 +181,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HierarchyBrowserManager">
     <option name="SHOW_PACKAGES" value="false" />
