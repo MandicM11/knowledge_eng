@@ -1,0 +1,231 @@
+FUNCTION_BLOCK ComputerAssessment
+
+    VAR_INPUT
+        gpu_core_clock_mhz : REAL;
+        gpu_video_memory_gb : REAL;
+        cpu_threads : REAL;
+        cpu_cores : REAL;
+        cpu_clock_speed_ghz : REAL;
+        ram_capacity_gb : REAL;
+    END_VAR
+
+    VAR_OUTPUT
+        HomeUse : REAL;
+        BusinessUse : REAL;
+        Gaming : REAL;
+        CryptocurrencyMining : REAL;
+        WebHosting : REAL;
+    END_VAR
+
+    FUZZIFY gpu_core_clock_mhz
+        TERM Low := (100, 1) (200, 0);
+        TERM Medium := (200, 0) (400, 1) (800, 1) (1000, 0);
+        TERM High := (1000, 0) (1250, 1) (2000, 0);
+    END_FUZZIFY
+
+    FUZZIFY gpu_video_memory_gb
+        TERM Low := (1, 1) (2, 0);
+        TERM Medium := (2, 0) (5, 1) (8, 0);
+        TERM High := (8, 0) (20, 1) (32, 0);
+    END_FUZZIFY
+
+    FUZZIFY cpu_threads
+        TERM Low := (2, 1) (4, 1) (8, 0);
+        TERM Medium := (8, 0) (20, 1) (32, 0);
+        TERM High := (32, 0) (80, 1) (128, 0);
+    END_FUZZIFY
+
+    FUZZIFY cpu_cores
+        TERM Low := (2, 1) (4, 1) (8, 0);
+        TERM Medium := (8, 0) (12, 1) (16, 0);
+        TERM High := (16, 0) (40, 1) (64, 0);
+    
+    END_FUZZIFY
+
+    FUZZIFY cpu_clock_speed_ghz
+        TERM Low := (1, 1) (2, 1) (2.5, 0);
+        TERM Medium := (2, 0) (2.5, 1) (3.5, 1) (4, 0);
+        TERM High := (3.5, 0) (4, 1) (5, 1);
+    END_FUZZIFY
+
+    FUZZIFY ram_capacity_gb
+        TERM Low := (1, 1) (4, 1) (8, 0) ;
+        TERM Medium := (8, 0) (20, 1) (32, 0);
+        TERM High := (32, 0) (80, 1) (128, 0);
+    END_FUZZIFY
+
+    DEFUZZIFY HomeUse
+        TERM Bad:= (0, 0) (15, 1) (30, 0);
+        TERM Average := (30, 0) (50, 1) (70, 0);
+        TERM Good := (70, 0) (85, 1) (100, 0);
+        METHOD : COG;
+        DEFAULT := 0;
+    END_DEFUZZIFY
+
+    DEFUZZIFY BusinessUse
+        TERM Bad:= (0, 0) (15, 1) (30, 0);
+        TERM Average := (30, 0) (50, 1) (70, 0);
+        TERM Good := (70, 0) (85, 1) (100, 0);
+        METHOD : COG;
+        DEFAULT := 0;
+    END_DEFUZZIFY
+
+    DEFUZZIFY Gaming
+        TERM Bad:= (0, 0) (15, 1) (30, 0);
+        TERM Average := (30, 0) (50, 1) (70, 0);
+        TERM Good := (70, 0) (85, 1) (100, 0);
+        METHOD : COG;
+        DEFAULT := 0;
+    END_DEFUZZIFY
+
+    DEFUZZIFY CryptocurrencyMining
+        TERM Bad:= (0, 0) (15, 1) (30, 0);
+        TERM Average := (30, 0) (50, 1) (70, 0);
+        TERM Good := (70, 0) (85, 1) (100, 0);
+        METHOD : COG;
+        DEFAULT := 0;
+    END_DEFUZZIFY
+
+    DEFUZZIFY WebHosting
+        TERM Bad:= (0, 0) (15, 1) (30, 0);
+        TERM Average := (30, 0) (50, 1) (70, 0);
+        TERM Good := (70, 0) (85, 1) (100, 0);
+        METHOD : COG;
+        DEFAULT := 0;
+    END_DEFUZZIFY
+ // RULEBLOCK za HomeUse
+    RULEBLOCK HomeUseRules
+        RULE 1 : IF gpu_core_clock_mhz IS Low THEN HomeUse IS Good WITH 0.9;
+        RULE 2 : IF gpu_core_clock_mhz IS Medium THEN HomeUse IS Average WITH 0.9;
+        RULE 3 : IF gpu_core_clock_mhz IS High THEN HomeUse IS Bad WITH 0.9;
+
+        RULE 4 : IF gpu_video_memory_gb IS Low THEN HomeUse IS Good WITH 0.9;
+        RULE 5 : IF gpu_video_memory_gb IS Medium THEN HomeUse IS Average WITH 0.9;
+        RULE 6 : IF gpu_video_memory_gb IS High THEN HomeUse IS Bad WITH 0.9;
+
+        RULE 7 : IF cpu_threads IS Low THEN HomeUse IS Good WITH 0.7;
+        RULE 8 : IF cpu_threads IS Medium THEN HomeUse IS Average WITH 0.7;
+        RULE 9 : IF cpu_threads IS High THEN HomeUse IS Bad WITH 0.7;
+
+        RULE 10 : IF cpu_cores IS Low THEN HomeUse IS Good WITH 0.7;
+        RULE 11 : IF cpu_cores IS Medium THEN HomeUse IS Average WITH 0.7;
+        RULE 12 : IF cpu_cores IS High THEN HomeUse IS Bad WITH 0.7;
+
+        RULE 13 : IF cpu_clock_speed_ghz IS Low THEN HomeUse IS Good WITH 0.7;
+        RULE 14 : IF cpu_clock_speed_ghz IS Medium THEN HomeUse IS Average WITH 0.7;
+        RULE 15 : IF cpu_clock_speed_ghz IS High THEN HomeUse IS Bad WITH 0.7;
+
+        RULE 16 : IF ram_capacity_gb IS Low THEN HomeUse IS Good WITH 0.6;
+        RULE 17 : IF ram_capacity_gb IS Medium THEN HomeUse IS Average WITH 0.6;
+        RULE 18 : IF ram_capacity_gb IS High THEN HomeUse IS Bad WITH 0.6;
+    END_RULEBLOCK
+
+    // RULEBLOCK za BusinessUse
+    RULEBLOCK BusinessUseRules
+        RULE 1 : IF gpu_core_clock_mhz IS Low THEN BusinessUse IS Good WITH 0.9;
+        RULE 2 : IF gpu_core_clock_mhz IS Medium THEN BusinessUse IS Average WITH 0.9;
+        RULE 3 : IF gpu_core_clock_mhz IS High THEN BusinessUse IS Bad WITH 0.9;
+
+        RULE 4 : IF gpu_video_memory_gb IS Low THEN BusinessUse IS Good WITH 0.9;
+        RULE 5 : IF gpu_video_memory_gb IS Medium THEN BusinessUse IS Average WITH 0.9;
+        RULE 6 : IF gpu_video_memory_gb IS High THEN BusinessUse IS Bad WITH 0.9;
+
+        RULE 7 : IF cpu_threads IS Low THEN BusinessUse IS Good WITH 0.9;
+        RULE 8 : IF cpu_threads IS Medium THEN BusinessUse IS Average WITH 0.9;
+        RULE 9 : IF cpu_threads IS High THEN BusinessUse IS Bad WITH 0.9;
+
+        RULE 10 : IF cpu_cores IS Low THEN BusinessUse IS Good WITH 0.8;
+        RULE 11 : IF cpu_cores IS Medium THEN BusinessUse IS Average WITH 0.8;
+        RULE 12 : IF cpu_cores IS High THEN BusinessUse IS Bad WITH 0.8;
+
+        RULE 13 : IF cpu_clock_speed_ghz IS Low THEN BusinessUse IS Good WITH 0.7;
+        RULE 14 : IF cpu_clock_speed_ghz IS Medium THEN BusinessUse IS Average WITH 0.7;
+        RULE 15 : IF cpu_clock_speed_ghz IS High THEN BusinessUse IS Bad WITH 0.7;
+
+        RULE 16 : IF ram_capacity_gb IS Low THEN BusinessUse IS Good WITH 0.9;
+        RULE 17 : IF ram_capacity_gb IS Medium THEN BusinessUse IS Average WITH 0.9;
+        RULE 18 : IF ram_capacity_gb IS High THEN BusinessUse IS Bad WITH 0.9;
+    END_RULEBLOCK
+
+    // RULEBLOCK za Gaming
+    RULEBLOCK GamingRules
+        RULE 1 : IF gpu_core_clock_mhz IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 2 : IF gpu_core_clock_mhz IS Medium THEN Gaming IS Average WITH 0.9;
+        RULE 3 : IF gpu_core_clock_mhz IS High THEN Gaming IS Good WITH 0.9;
+
+        RULE 4 : IF gpu_video_memory_gb IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 5 : IF gpu_video_memory_gb IS Medium THEN Gaming IS Average WITH 0.9;
+        RULE 6 : IF gpu_video_memory_gb IS High THEN Gaming IS Good WITH 0.9;
+
+        RULE 7 : IF cpu_threads IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 8 : IF cpu_threads IS Medium THEN Gaming IS Average WITH 0.9;
+        RULE 9 : IF cpu_threads IS High THEN Gaming IS Good WITH 0.9;
+
+        RULE 10 : IF cpu_cores IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 11 : IF cpu_cores IS Medium THEN Gaming IS Average WITH 0.9;
+        RULE 12 : IF cpu_cores IS High THEN Gaming IS Good WITH 0.9;
+
+        RULE 13 : IF cpu_clock_speed_ghz IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 14 : IF cpu_clock_speed_ghz IS Medium THEN Gaming IS Average WITH 0.8;
+        RULE 15 : IF cpu_clock_speed_ghz IS High THEN Gaming IS Good WITH 0.9;
+
+        RULE 16 : IF ram_capacity_gb IS Low THEN Gaming IS Bad WITH 0.9;
+        RULE 17 : IF ram_capacity_gb IS Medium THEN Gaming IS Average WITH 0.9;
+        RULE 18 : IF ram_capacity_gb IS High THEN Gaming IS Good WITH 0.9;
+    END_RULEBLOCK
+
+    // RULEBLOCK za CryptocurrencyMining
+    RULEBLOCK CryptocurrencyMiningRules
+        RULE 1 : IF gpu_core_clock_mhz IS Low THEN CryptocurrencyMining IS Bad WITH 0.9;
+        RULE 2 : IF gpu_core_clock_mhz IS Medium THEN CryptocurrencyMining IS Average WITH 0.9;
+        RULE 3 : IF gpu_core_clock_mhz IS High THEN CryptocurrencyMining IS Good WITH 0.9;
+
+        RULE 4 : IF gpu_video_memory_gb IS Low THEN CryptocurrencyMining IS Bad WITH 0.9;
+        RULE 5 : IF gpu_video_memory_gb IS Medium THEN CryptocurrencyMining IS Average WITH 0.9;
+        RULE 6 : IF gpu_video_memory_gb IS High THEN CryptocurrencyMining IS Good WITH 0.9;
+
+        RULE 7 : IF cpu_threads IS Low THEN CryptocurrencyMining IS Bad WITH 0.1;
+        RULE 8 : IF cpu_threads IS Medium THEN CryptocurrencyMining IS Average WITH 0.1;
+        RULE 9 : IF cpu_threads IS High THEN CryptocurrencyMining IS Good WITH 0.1;
+
+        RULE 10 : IF cpu_cores IS Low THEN CryptocurrencyMining IS Bad WITH 0.1;
+        RULE 11 : IF cpu_cores IS Medium THEN CryptocurrencyMining IS Average WITH 0.1;
+        RULE 12 : IF cpu_cores IS High THEN CryptocurrencyMining IS Good WITH 0.1;
+
+        RULE 13 : IF cpu_clock_speed_ghz IS Low THEN CryptocurrencyMining IS Bad WITH 0.1;
+        RULE 14 : IF cpu_clock_speed_ghz IS Medium THEN CryptocurrencyMining IS Average WITH 0.1;
+        RULE 15 : IF cpu_clock_speed_ghz IS High THEN CryptocurrencyMining IS Good WITH 0.1;
+
+        RULE 16 : IF ram_capacity_gb IS Low THEN CryptocurrencyMining IS Bad WITH 0.1;
+        RULE 17 : IF ram_capacity_gb IS Medium THEN CryptocurrencyMining IS Average WITH 0.1;
+        RULE 18 : IF ram_capacity_gb IS High THEN CryptocurrencyMining IS Good WITH 0.1;
+    END_RULEBLOCK
+
+    // RULEBLOCK za WebHosting
+    RULEBLOCK WebHostingRules
+        RULE 1 : IF gpu_core_clock_mhz IS Low THEN WebHosting IS Bad WITH 0.7;
+        RULE 2 : IF gpu_core_clock_mhz IS Medium THEN WebHosting IS Average WITH 0.5;
+        RULE 3 : IF gpu_core_clock_mhz IS High THEN WebHosting IS Good WITH 0.1;
+
+        RULE 4 : IF gpu_video_memory_gb IS Low THEN WebHosting IS Bad WITH 0.7;
+        RULE 5 : IF gpu_video_memory_gb IS Medium THEN WebHosting IS Average WITH 0.5;
+        RULE 6 : IF gpu_video_memory_gb IS High THEN WebHosting IS Good WITH 0.1;
+
+        RULE 7 : IF cpu_threads IS Low THEN WebHosting IS Bad WITH 0.9;
+        RULE 8 : IF cpu_threads IS Medium THEN WebHosting IS Average WITH 0.9;
+        RULE 9 : IF cpu_threads IS High THEN WebHosting IS Good WITH 0.9;
+
+        RULE 10 : IF cpu_cores IS Low THEN WebHosting IS Bad WITH 0.9;
+        RULE 11 : IF cpu_cores IS Medium THEN WebHosting IS Average WITH 0.9;
+        RULE 12 : IF cpu_cores IS High THEN WebHosting IS Good WITH 0.9;
+
+        RULE 13 : IF cpu_clock_speed_ghz IS Low THEN WebHosting IS Bad WITH 0.9;
+        RULE 14 : IF cpu_clock_speed_ghz IS Medium THEN WebHosting IS Average WITH 0.9;
+        RULE 15 : IF cpu_clock_speed_ghz IS High THEN WebHosting IS Good WITH 0.9;
+
+        RULE 16 : IF ram_capacity_gb IS Low THEN WebHosting IS Bad WITH 0.5;
+        RULE 17 : IF ram_capacity_gb IS Medium THEN WebHosting IS Average WITH 0.5;
+        RULE 18 : IF ram_capacity_gb IS High THEN WebHosting IS Good WITH 0.5;
+    END_RULEBLOCK
+
+END_FUNCTION_BLOCK

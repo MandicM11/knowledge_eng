@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d58b77-5013-4475-9e56-d7ce72f95109" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/controller/GPUController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/dto/GPUInfoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/GPUService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/controller/ComputerAssessmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/dto/ComputerAssessmentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Knowledge_engineering/service/FuzzyLogicService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Knowledge_engineering.iws" beforeDir="false" afterPath="$PROJECT_DIR$/Knowledge_engineering.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Knowledge_base.ttl" beforeDir="false" afterPath="$PROJECT_DIR$/data/Knowledge_base.ttl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
