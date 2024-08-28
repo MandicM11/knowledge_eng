@@ -1186,8 +1186,12 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/ASUS_ROG_Crosshair_VIII_Hero
-:ASUS_ROG_Crosshair_VIII_Hero rdf:type owl:NamedIndividual ;
+:ASUS_ROG_Crosshair_VIII_Hero rdf:type owl:NamedIndividual ,
+                                       :Motherboard ;
                               :carries_cpu :Intel_Core_i9-13900K ;
+                              :carries_gpu :GeForce_RTX_3070_Ti ,
+                                           :GeForce_RTX_4080 ,
+                                           :GeForce_RTX_4090 ;
                               :carries_ram :Kingston_HyperX_Fury_16_GB ;
                               :has_port :USB_3.0 ;
                               :motherboard_has_dimensions "30.5 cm x 24.4 cm" ;
@@ -1196,7 +1200,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/ASUS_ROG_Crosshair_X670E_Hero
-:ASUS_ROG_Crosshair_X670E_Hero rdf:type owl:NamedIndividual ;
+:ASUS_ROG_Crosshair_X670E_Hero rdf:type owl:NamedIndividual ,
+                                        :Motherboard ;
                                :motherboard_has_dimensions "30.5 cm x 24.4 cm" ;
                                :motherboard_has_form_factor "ATX" ;
                                :motherboard_has_name "ASUS ROG Crosshair X670E Hero" .
@@ -1313,10 +1318,10 @@
                                                      :AMD_Ryzen_7_5700X ,
                                                      :GIGABYTE_Z790_AORUS_ELITE_AX_ATX_LGA1700 ,
                                                      :Intel_Core_i9-13900K ;
-                     :gpu_has_memory 1800 ,
-                                     270 ;
+                     :gpu_has_memory 1800 ;
                      :gpu_has_name "GeForce_RTX_3070_Ti" ;
                      :gpu_has_speed 1575 ;
+                     :gpu_has_tdp 270 ;
                      :gpu_has_video_memory 8129 .
 
 
