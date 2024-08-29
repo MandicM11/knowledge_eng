@@ -6,6 +6,16 @@ public class CPUInfoDTO {
     private double speed;
     private int threads;
 
+    // Konstruktor sa parametrima
+    public CPUInfoDTO(String name, int cores, double speed, int threads) {
+        this.name = name;
+        this.cores = cores;
+        this.speed = speed;
+        this.threads = threads;
+    }
+
+    public CPUInfoDTO(){};
+
     // Getter i setter za 'name'
     public String getName() {
         return name;

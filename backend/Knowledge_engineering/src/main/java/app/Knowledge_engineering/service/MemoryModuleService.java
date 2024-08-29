@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.stream.Collectors;
 
 @Service
 public class MemoryModuleService {
@@ -66,7 +67,7 @@ public class MemoryModuleService {
         }
 
         // Proverite kompatibilnost
-        if (!isCompatibleWithMotherboard(motherboardIndividual, "enables_attachments_ram")) {
+        if (!isCompatibleWithMotherboard(motherboardIndividual, "carries_ram")) {
             logger.error("Motherboard {} does not support RAM attachments", motherboardModel);
             return false;
         }
@@ -74,14 +75,23 @@ public class MemoryModuleService {
         // Proverite karakteristike RAM-a
         String supportedMemoryType = getStringPropertyValue(ramIndividual, "ram_has_type");
         int maxMemoryCapacity = getIntegerPropertyValue(ramIndividual, "ram_has_memory");
+        logger.info("parsed succesfull");
+        String normalizedModuleType = moduleDTO.getType().trim().toUpperCase();
+        String normalizedSupportedType = supportedMemoryType.trim().toUpperCase();
 
+        logger.info("Comparing memory types:");
+        logger.info("Normalized Memory type from DTO: '{}'", normalizedModuleType);
+        logger.info("Normalized Supported memory type: '{}'", normalizedSupportedType);
 
-        if (!moduleDTO.getType().equalsIgnoreCase(supportedMemoryType)) {
-            logger.error("Memory type {} is not supported by the RAM module. Expected type: {}", moduleDTO.getType(), supportedMemoryType);
+        if (!normalizedModuleType.equals(normalizedSupportedType)) {
+            logger.error("Normalized Memory11 type '{}' is not supported by the RAM module. Expected type: '{}'", normalizedModuleType, normalizedSupportedType);
             return false;
         }
 
 
+
+        logger.info("Module DTO Type: '{}', Supported Type: '{}'", moduleDTO.getType(), supportedMemoryType);
+        logger.info("Module DTO Capacity: '{}', Max Capacity: '{}'", moduleDTO.getCapacity(), maxMemoryCapacity);
 
         if (moduleDTO.getCapacity() > maxMemoryCapacity) {
             logger.error("Memory capacity {} exceeds the maximum supported capacity {}", moduleDTO.getCapacity(), maxMemoryCapacity);
@@ -163,7 +173,17 @@ public class MemoryModuleService {
         IRI propertyIRI = IRI.create(ontologyIRI + "/" + attachmentProperty);
         OWLObjectProperty objectProperty = factory.getOWLObjectProperty(propertyIRI);
 
-        return ontology.getObjectPropertyAssertionAxioms(componentIndividual).stream()
+        logger.info("Checking if componentIndividual '{}' has property '{}'", componentIndividual.getIRI(), objectProperty.getIRI());
+
+        boolean isCompatible = ontology.getObjectPropertyAssertionAxioms(componentIndividual).stream()
                 .anyMatch(axiom -> axiom.getProperty().equals(objectProperty));
+
+        if (isCompatible) {
+            logger.info("Component '{}' is compatible with the motherboard via property '{}'", componentIndividual.getIRI(), attachmentProperty);
+        } else {
+            logger.error("Component '{}' is NOT compatible with the motherboard via property '{}'", componentIndividual.getIRI(), attachmentProperty);
+        }
+
+        return isCompatible;
     }
 }

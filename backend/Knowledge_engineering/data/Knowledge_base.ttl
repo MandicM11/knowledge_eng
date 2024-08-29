@@ -12,6 +12,27 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#has_CPU
+:has_CPU rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :PC ;
+         rdfs:range :CPU .
+
+
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#has_GPU
+:has_GPU rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :PC ;
+         rdfs:range :GPU .
+
+
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#has_RAM
+:has_RAM rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :PC ;
+         rdfs:range :RAM .
+
+
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/IDE_is_compatible_with_OS
 :IDE_is_compatible_with_OS rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf :is_compatible_with_OS .
@@ -638,6 +659,11 @@
 #    Classes
 #################################################################
 
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PC
+:PC rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PS/2Mouse
 <http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PS/2Mouse> rdf:type owl:Class ;
                                                                                 rdfs:subClassOf :Mouse .
@@ -1047,6 +1073,30 @@
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PC1
+:PC1 rdf:type owl:NamedIndividual ,
+              :PC ;
+     :has_CPU :Intel_Core_i9-13900K ;
+     :has_GPU :GeForce_RTX_4090 ;
+     :has_RAM :G.SKILL_Trident_Z_NEO_32GB_DDR4_3600MHz .
+
+
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PC2
+:PC2 rdf:type owl:NamedIndividual ,
+              :PC ;
+     :has_CPU :Intel_Core_i3-3240 ;
+     :has_GPU :GeForce_GT_1030 ;
+     :has_RAM :KINGSTON_DDR3_1333Mhz_Desktop_PC_DDR3_8_GB .
+
+
+###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#PC3
+:PC3 rdf:type owl:NamedIndividual ,
+              :PC ;
+     :has_CPU :Intel_Core_i7-8750 ;
+     :has_GPU :GeForce_RTX_3060 ;
+     :has_RAM :Kingston_HyperX_Fury_16_GB .
+
+
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#100GbE_Intel®_Ethernet_Network_Adapter_E810
 <http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4#100GbE_Intel®_Ethernet_Network_Adapter_E810> rdf:type owl:NamedIndividual ;
                                                                                                                   :network_card_has_interface "Intel" ;
@@ -1159,7 +1209,6 @@
                      :has_cache :L1_1 ,
                                 :L3_3 ;
                      :has_socket :AM4 ;
-                     :unit1_is_compatible_with_unit2 :Radeon_RX_6500_XT ;
                      :cpu_has_cores 8 ;
                      :cpu_has_name "AMD Ryzen 7 5800X3D" ;
                      :cpu_has_speed 3.4 ;
@@ -1245,7 +1294,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/G.SKILL_Trident_Z_NEO_32GB_DDR4_3600MHz
-:G.SKILL_Trident_Z_NEO_32GB_DDR4_3600MHz rdf:type owl:NamedIndividual ;
+:G.SKILL_Trident_Z_NEO_32GB_DDR4_3600MHz rdf:type owl:NamedIndividual ,
+                                                  :RAM ;
                                          :ram_has_latency 16 ;
                                          :ram_has_memory 32 ;
                                          :ram_has_name "G.SKILL Trident Z NEO 32GB DDR4 3600MHz" ;
@@ -1275,11 +1325,11 @@
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/GeForce_GT_1030
 :GeForce_GT_1030 rdf:type owl:NamedIndividual ,
                           :GPU ;
+                 :gpu_has_memory 2000 ;
                  :gpu_has_name "GeForce GT 1030" ;
                  :gpu_has_speed 1227 ;
                  :gpu_has_tdp 30 ;
-                 :gpu_has_video_memory 2000 ,
-                                       6008 .
+                 :gpu_has_video_memory 6008 .
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/GeForce_GT_1060
@@ -1299,10 +1349,10 @@
                   :unit1_is_compatible_with_unit2 :AMD_Ryzen_5_5600 ,
                                                   :AMD_Ryzen_5_5600G ,
                                                   :AMD_Ryzen_5_5600X ;
-                  :gpu_has_memory 15000 ,
-                                  170 ;
+                  :gpu_has_memory 1800 ;
                   :gpu_has_name "GeForce_RTX_3060" ;
                   :gpu_has_speed 1320 ;
+                  :gpu_has_tdp 170 ;
                   :gpu_has_video_memory 12288 .
 
 
@@ -1436,9 +1486,9 @@
                     :hardware_has_manufacturer :Intel ;
                     :has_cache :L1_3 ;
                     :cpu_has_cores 2 ;
+                    :cpu_has_name "Intel_Core_i3-2100" ;
                     :cpu_has_speed 3.1 ;
-                    :cpu_has_threads 4 ;
-                    :driver_has_name "Intel_Core_i3-2100" .
+                    :cpu_has_threads 4 .
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Intel_Core_i3-3220
@@ -1600,7 +1650,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Intel_Core_i9-13900K
-:Intel_Core_i9-13900K rdf:type owl:NamedIndividual ;
+:Intel_Core_i9-13900K rdf:type owl:NamedIndividual ,
+                               :CPU ;
                       :attaches_to :Gigabyte_Z790_Aorus_Master ;
                       :hardware_has_manufacturer :Intel ;
                       :has_cache :L3_1 ,
@@ -1626,8 +1677,10 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/KINGSTON_DDR3_1333Mhz_Desktop_PC_DDR3_8_GB
-:KINGSTON_DDR3_1333Mhz_Desktop_PC_DDR3_8_GB rdf:type owl:NamedIndividual ;
+:KINGSTON_DDR3_1333Mhz_Desktop_PC_DDR3_8_GB rdf:type owl:NamedIndividual ,
+                                                     :RAM ;
                                             :hardware_has_manufacturer :Kingston ;
+                                            :ram_has_latency 16 ;
                                             :ram_has_memory 8 ;
                                             :ram_has_name "Kingston DDR3 1333Mhz Desktop PC DDR3 8 GB" ;
                                             :ram_has_type "DDR3" .
@@ -1658,7 +1711,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Kingston_FURY_Beast_32_GB
-:Kingston_FURY_Beast_32_GB rdf:type owl:NamedIndividual ;
+:Kingston_FURY_Beast_32_GB rdf:type owl:NamedIndividual ,
+                                    :RAM ;
                            :hardware_has_manufacturer :Kingston ;
                            :ram_has_latency 16 ;
                            :ram_has_memory 32 ;
@@ -1668,7 +1722,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Kingston_HyperX_Fury_16_GB
-:Kingston_HyperX_Fury_16_GB rdf:type owl:NamedIndividual ;
+:Kingston_HyperX_Fury_16_GB rdf:type owl:NamedIndividual ,
+                                     :RAM ;
                             :hardware_has_manufacturer :Kingston ;
                             :ram_has_latency 16 ;
                             :ram_has_memory 16 ;
@@ -1678,7 +1733,8 @@
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Kingston_HyperX_Fury_DDR4_8GB_3200MHZ
-:Kingston_HyperX_Fury_DDR4_8GB_3200MHZ rdf:type owl:NamedIndividual ;
+:Kingston_HyperX_Fury_DDR4_8GB_3200MHZ rdf:type owl:NamedIndividual ,
+                                                :RAM ;
                                        :hardware_has_manufacturer :Kingston ;
                                        :port_has_name "Kingston HyperX Fury DDR4 8GB" ;
                                        :ram_has_latency 14 ;
@@ -1846,25 +1902,9 @@
                             :GPU .
 
 
-###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6500_XT
-:Radeon_RX_6500_XT rdf:type owl:NamedIndividual .
-
-
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6600_XT
 :Radeon_RX_6600_XT rdf:type owl:NamedIndividual ,
                             :GPU .
-
-
-###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6700
-:Radeon_RX_6700 rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6700_XT
-:Radeon_RX_6700_XT rdf:type owl:NamedIndividual .
-
-
-###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6800
-:Radeon_RX_6800 rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/pc/ontologies/2023/3/untitled-ontology-4/Radeon_RX_6800_XT

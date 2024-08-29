@@ -1,12 +1,14 @@
 package app.Knowledge_engineering.dto;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public class MemoryModuleDTO {
     private String name;
-    private int capacity; // у GB
-    private int speed; // у MHz
+    private Integer capacity; // у GB
+    private Integer speed; // у MHz
     private String type; // DDR4, DDR3, итд.
 
-    public MemoryModuleDTO(String name, int capacity, int speed, String type) {
+    public MemoryModuleDTO(String name, Integer capacity, int speed, String type) {
         this.name = name;
         this.capacity = capacity;
         this.speed = speed;

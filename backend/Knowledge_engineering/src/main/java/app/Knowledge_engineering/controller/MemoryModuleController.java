@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class MemoryModuleController {
 
     private final MemoryModuleService memoryModuleService;
-
+    private static final Logger logger = LoggerFactory.getLogger(MemoryModuleController.class);
     @Autowired
     public MemoryModuleController(MemoryModuleService memoryModuleService) {
         this.memoryModuleService = memoryModuleService;
@@ -24,7 +27,10 @@ public class MemoryModuleController {
             @RequestParam String memoryName,
             @RequestParam String motherboardModel) {
 
-        // Kreiramo MemoryModuleDTO sa podacima iz request parametara
+
+        logger.info("Checking compatibility with parameters: memoryType={}, memoryCapacity={}, memoryName={}, motherboardModel={}",
+                memoryType, memoryCapacity, memoryName, motherboardModel);
+
         MemoryModuleDTO memoryModuleDTO = new MemoryModuleDTO();
         memoryModuleDTO.setType(memoryType);
         memoryModuleDTO.setCapacity(memoryCapacity);
